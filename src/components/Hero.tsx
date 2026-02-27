@@ -62,7 +62,7 @@ export default function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-800/50 bg-orange-50 dark:bg-orange-950/20 text-[#ff6b00] text-sm font-semibold mb-6 sm:mb-8 animate-fade-in-up">
           <span className="w-2 h-2 rounded-full bg-[#ff6b00] animate-pulse" aria-hidden="true" />
-          Launching in 2026 — Fresh. Bold. Secure.
+          Launched in 2025 — Fresh. Bold. Secure.
         </div>
 
         {/* Headline — responsive clamp typography */}
