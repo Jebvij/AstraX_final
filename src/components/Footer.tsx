@@ -33,21 +33,23 @@ const social = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a0f1e] text-white pt-20 pb-8 relative overflow-hidden">
+    <footer className="bg-[#0a0f1e] text-white pt-16 sm:pt-20 pb-8 relative overflow-hidden" role="contentinfo">
       {/* Background decoration */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ff6b00]/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ff6b00]/50 to-transparent" aria-hidden="true" />
       <div
-        className="absolute top-0 left-0 w-96 h-96 rounded-full blur-[150px] opacity-10 pointer-events-none"
+        className="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full blur-[150px] opacity-10 pointer-events-none"
         style={{ background: "radial-gradient(circle, #ff6b00 0%, transparent 70%)" }}
+        aria-hidden="true"
       />
       <div
-        className="absolute bottom-0 right-0 w-72 h-72 rounded-full blur-[120px] opacity-8 pointer-events-none"
+        className="absolute bottom-0 right-0 w-48 sm:w-72 h-48 sm:h-72 rounded-full blur-[120px] opacity-8 pointer-events-none"
         style={{ background: "radial-gradient(circle, #ff8c38 0%, transparent 70%)" }}
+        aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Top row */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 mb-12 sm:mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-5">
@@ -70,7 +72,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-white/50 hover:text-[#ff6b00] hover:border-[#ff6b00]/40 hover:scale-110 transition-all duration-200"
+                  className="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center text-white/50 hover:text-[#ff6b00] hover:border-[#ff6b00]/40 hover:scale-110 active:scale-95 transition-all duration-200"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -106,7 +108,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter */}
-        <div className="border border-white/10 rounded-2xl p-6 mb-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="border border-white/10 rounded-2xl p-5 sm:p-6 mb-10 sm:mb-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
           <div>
             <h4
               className="font-bold text-base text-white mb-1"
@@ -120,21 +122,22 @@ export default function Footer() {
             <input
               type="email"
               placeholder="your@email.com"
-              className="flex-1 sm:w-56 px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-[#ff6b00]/60 transition-colors duration-200"
+              aria-label="Email for newsletter"
+              className="flex-1 sm:w-56 px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder:text-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/50 focus:border-[#ff6b00]/60 transition-colors duration-200 min-h-[44px]"
             />
-            <button className="px-5 py-3 rounded-xl bg-brand-gradient text-white text-sm font-semibold hover:opacity-90 active:scale-95 transition-all duration-200">
+            <button className="shrink-0 px-5 py-3 rounded-xl bg-brand-gradient text-white text-sm font-semibold hover:opacity-90 active:scale-95 transition-all duration-200 min-h-[44px]">
               Subscribe
             </button>
           </div>
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-sm flex items-center gap-1">
+        <div className="border-t border-white/10 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <p className="text-white/40 text-sm flex items-center gap-1 flex-wrap justify-center sm:justify-start">
             &copy; {new Date().getFullYear()} AstraX Fusion Tech. All rights reserved. Made with{" "}
-            <Heart className="w-3.5 h-3.5 text-[#ff6b00]" /> for a safer internet.
+            <Heart className="w-3.5 h-3.5 text-[#ff6b00]" aria-hidden="true" /> for a safer internet.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
             {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (
               <a
                 key={item}

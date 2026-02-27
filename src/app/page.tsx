@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import Training from "@/components/Training";
 import About from "@/components/About";
 import WhyUs from "@/components/WhyUs";
 import Contact from "@/components/Contact";
@@ -13,10 +14,14 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <Services />
+        <Training />
         <About />
         <WhyUs />
         <Contact />
