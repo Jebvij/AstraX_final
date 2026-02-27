@@ -10,8 +10,8 @@ const contactInfo = [
   {
     Icon: Mail,
     label: "Email Us",
-    value: "hello@astraxfusiontech.io",
-    link: "mailto:hello@astraxfusiontech.io",
+    value: "astraxfusiontech@gmail.com",
+    link: "mailto:astraxfusiontech@gmail.com",
   },
   {
     Icon: Phone,

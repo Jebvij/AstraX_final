@@ -17,7 +17,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "AstraX Fusion Tech — Cybersecurity & IT Services",
+  title: "AstraX Fusion Tech",
   description:
     "Professional cybersecurity solutions, penetration testing, vulnerability assessment, ethical hacking training, and website development services.",
   keywords:
