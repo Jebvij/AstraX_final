@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
     Shield, BookOpen, Code2, BugPlay, Eye,
@@ -84,21 +84,7 @@ function ServiceCard({
 
 export default function Services() {
     const [activeTab, setActiveTab] = useState(0);
-    const sectionRef = useRef<HTMLDivElement>(null);
     const tabListRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) entry.target.classList.add("visible");
-            });
-        });
-
-        const els = sectionRef.current?.querySelectorAll(".reveal");
-        els?.forEach((el) => observer.observe(el));
-
-        return () => observer.disconnect();
-    }, []);
 
     // Handle keyboard navigation for tabs
     const handleTabKeyDown = (e: React.KeyboardEvent, index: number) => {
@@ -129,13 +115,12 @@ export default function Services() {
     return (
         <section
             id="services"
-            ref={sectionRef}
             className="py-16 sm:py-20 bg-secondary/30"
             aria-label="Our services"
         >
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
                 {/* Section header */}
-                <div className="text-center mb-10 sm:mb-12 reveal">
+                <div className="text-center mb-10 sm:mb-12 animate-fade-in-up">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-800/50 bg-orange-50 dark:bg-orange-950/20 text-[#ff6b00] text-sm font-semibold mb-4">
                         <Shield className="w-4 h-4" aria-hidden="true" />
                         What We Offer
@@ -152,39 +137,43 @@ export default function Services() {
                     <p className="text-muted-foreground max-w-xl mx-auto text-base sm:text-lg">
                         Comprehensive cybersecurity, training, and development solutions tailored to your needs.
                     </p>
-                </div>
+                </div >
 
                 {/* Tabs — horizontally scrollable on mobile */}
-                <div
-                    ref={tabListRef}
-                    role="tablist"
-                    aria-label="Service categories"
-                    className="flex gap-2 sm:gap-3 mb-8 sm:mb-10 overflow-x-auto scrollbar-hide pb-2 sm:justify-center"
-                >
-                    {services.map((svc, i) => (
-                        <button
-                            key={svc.id}
-                            role="tab"
-                            id={`tab-${svc.id}`}
-                            aria-selected={i === activeTab}
-                            aria-controls={`panel-${svc.id}`}
-                            tabIndex={i === activeTab ? 0 : -1}
-                            onClick={() => setActiveTab(i)}
-                            onKeyDown={(e) => handleTabKeyDown(e, i)}
-                            className={`shrink-0 px-4 sm:px-6 py-3 rounded-2xl font-semibold text-sm sm:text-base transition-all duration-200 min-h-[44px] ${i === activeTab
-                                ? "text-white shadow-lg"
-                                : "glass-card hover:scale-[1.02]"
-                                }`}
-                            style={
-                                i === activeTab
-                                    ? { background: `linear-gradient(135deg, ${svc.color}, #ff8c38)` }
-                                    : {}
-                            }
-                        >
-                            <span className="sm:hidden">{svc.shortLabel}</span>
-                            <span className="hidden sm:inline">{svc.category}</span>
-                        </button>
-                    ))}
+                <div className="relative mb-8 sm:mb-10 animate-fade-in-up">
+                    <div
+                        ref={tabListRef}
+                        role="tablist"
+                        aria-label="Service categories"
+                        className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide pb-2 sm:justify-center px-1"
+                    >
+                        {services.map((svc, i) => (
+                            <button
+                                key={svc.id}
+                                role="tab"
+                                id={`tab-${svc.id}`}
+                                aria-selected={i === activeTab}
+                                aria-controls={`panel-${svc.id}`}
+                                tabIndex={i === activeTab ? 0 : -1}
+                                onClick={() => setActiveTab(i)}
+                                onKeyDown={(e) => handleTabKeyDown(e, i)}
+                                className={`shrink-0 px-4 sm:px-6 py-3 rounded-2xl font-bold text-xs sm:text-base transition-all duration-200 min-h-[44px] ${i === activeTab
+                                    ? "text-white shadow-lg"
+                                    : "glass-card hover:scale-[1.02]"
+                                    }`}
+                                style={
+                                    i === activeTab
+                                        ? { background: `linear-gradient(135deg, ${svc.color}, #ff8c38)` }
+                                        : {}
+                                }
+                            >
+                                <span className="sm:hidden">{svc.shortLabel}</span>
+                                <span className="hidden sm:inline">{svc.category}</span>
+                            </button>
+                        ))}
+                    </div>
+                    {/* Shadow indicator */}
+                    <div className="absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-[#f8fafc] dark:from-[#0a0f1e] to-transparent pointer-events-none md:hidden" />
                 </div>
 
                 {/* Service cards */}

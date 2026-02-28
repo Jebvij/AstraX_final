@@ -1,6 +1,5 @@
-"use client";
-
 import { Twitter, Linkedin, Github, Instagram, Heart } from "lucide-react";
+import Image from "next/image";
 
 const footerLinks: Record<string, string[]> = {
   Services: [
@@ -53,7 +52,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-5">
-              <img src="/logo.png" alt="AstraX Fusion Tech" className="w-10 h-10 rounded-xl object-contain" />
+              <Image src="/logo.png" alt="AstraX Fusion Tech" width={40} height={40} className="rounded-xl object-contain" />
               <span
                 className="font-extrabold text-xl tracking-tight"
                 style={{ fontFamily: "var(--font-poppins)" }}

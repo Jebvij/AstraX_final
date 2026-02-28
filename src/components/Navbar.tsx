@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -104,10 +105,13 @@ export default function Navbar() {
             className="flex items-center"
             aria-label="AstraX Fusion Tech"
           >
-            <img
+            <Image
               src="/logo.png"
               alt="AstraX Fusion Tech"
-              className="h-[72px] sm:h-20 md:h-24 lg:h-[120px] w-auto object-contain"
+              width={200}
+              height={80}
+              priority
+              className="h-12 sm:h-14 md:h-20 lg:h-24 w-auto object-contain"
             />
           </a>
         </div>

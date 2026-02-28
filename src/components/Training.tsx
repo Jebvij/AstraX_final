@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
     Shield, Brain, Code2, Cloud, Database,
     Sword, Target, Bot, Users, Eye,
@@ -98,19 +98,7 @@ function CourseCard({ Icon, title, desc, index }: Course & { index: number }) {
 /* ── Main Component ── */
 export default function Training() {
     const [activeTab, setActiveTab] = useState(0);
-    const sectionRef = useRef<HTMLDivElement>(null);
     const tabListRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible"));
-            },
-            { threshold: 0.1 }
-        );
-        sectionRef.current?.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-        return () => observer.disconnect();
-    }, []);
 
     // Keyboard navigation for tabs
     const handleTabKeyDown = (e: React.KeyboardEvent, index: number) => {
@@ -140,7 +128,6 @@ export default function Training() {
     return (
         <section
             id="training"
-            ref={sectionRef}
             className="py-16 sm:py-24 bg-background relative overflow-hidden"
             aria-label="Training Programs"
         >
@@ -153,7 +140,7 @@ export default function Training() {
 
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center mb-10 sm:mb-14 reveal">
+                <div className="text-center mb-10 sm:mb-14 animate-fade-in-up">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-800/50 bg-orange-50 dark:bg-orange-950/20 text-[#ff6b00] text-sm font-semibold mb-4">
                         <GraduationCap className="w-4 h-4" aria-hidden="true" />
                         Training Programs
@@ -174,34 +161,38 @@ export default function Training() {
                 </div>
 
                 {/* Category Tabs */}
-                <div
-                    ref={tabListRef}
-                    role="tablist"
-                    aria-label="Training categories"
-                    className="flex gap-2 mb-8 sm:mb-12 overflow-x-auto scrollbar-hide pb-2 sm:justify-center reveal"
-                >
-                    {categories.map((cat, i) => {
-                        const isActive = i === activeTab;
-                        return (
-                            <button
-                                key={cat.id}
-                                role="tab"
-                                id={`training-tab-${cat.id}`}
-                                aria-selected={isActive}
-                                aria-controls={`training-panel-${cat.id}`}
-                                tabIndex={isActive ? 0 : -1}
-                                onClick={() => setActiveTab(i)}
-                                onKeyDown={(e) => handleTabKeyDown(e, i)}
-                                className={`shrink-0 flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-sm font-semibold transition-all duration-200 min-h-[44px] ${isActive
+                <div className="relative mb-8 sm:mb-12 animate-fade-in-up">
+                    <div
+                        ref={tabListRef}
+                        role="tablist"
+                        aria-label="Training categories"
+                        className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 sm:justify-center px-1"
+                    >
+                        {categories.map((cat, i) => {
+                            const isActive = i === activeTab;
+                            return (
+                                <button
+                                    key={cat.id}
+                                    role="tab"
+                                    id={`training-tab-${cat.id}`}
+                                    aria-selected={isActive}
+                                    aria-controls={`training-panel-${cat.id}`}
+                                    tabIndex={isActive ? 0 : -1}
+                                    onClick={() => setActiveTab(i)}
+                                    onKeyDown={(e) => handleTabKeyDown(e, i)}
+                                    className={`shrink-0 flex items-center gap-2 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 min-h-[44px] ${isActive
                                         ? "bg-[#ff6b00] text-white shadow-lg shadow-orange-300/30 dark:shadow-orange-900/40"
                                         : "glass-card text-foreground/70 hover:text-[#ff6b00] hover:scale-[1.02]"
-                                    }`}
-                            >
-                                <cat.Icon className="w-4 h-4" aria-hidden="true" />
-                                <span>{cat.label}</span>
-                            </button>
-                        );
-                    })}
+                                        }`}
+                                >
+                                    <cat.Icon className="w-3.5 h-3.5 sm:w-4 h-4" aria-hidden="true" />
+                                    <span>{cat.label}</span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                    {/* Shadow indicators for scroll - only on mobile */}
+                    <div className="absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none md:hidden" />
                 </div>
 
                 {/* Course Cards Grid */}
@@ -217,17 +208,17 @@ export default function Training() {
                 </div>
 
                 {/* Bottom CTA */}
-                <div className="text-center mt-10 sm:mt-14 reveal">
+                <div className="text-center mt-10 sm:mt-14 animate-fade-in-up">
                     <p className="text-muted-foreground text-sm sm:text-base mb-5">
                         Can&apos;t find what you&apos;re looking for? We offer custom training for teams.
                     </p>
-                    <button
-                        onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                    <a
+                        href="#contact"
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-white bg-brand-gradient hover:opacity-90 active:scale-95 transition-all duration-200 shadow-lg shadow-orange-200/40 dark:shadow-orange-900/30"
                     >
                         Request Custom Training
                         <ArrowRight className="w-5 h-5" aria-hidden="true" />
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>

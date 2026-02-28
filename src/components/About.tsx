@@ -1,7 +1,4 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { Shield, CheckCircle2, Heart, Handshake, Eye, Flame } from "lucide-react";
+import { Shield, CheckCircle2, Handshake, Eye, Flame } from "lucide-react";
 
 const values = [
   {
@@ -34,26 +31,11 @@ const achievements = [
 ];
 
 export default function About() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible"));
-      },
-      { threshold: 0.1 }
-    );
-    sectionRef.current?.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el) =>
-      observer.observe(el)
-    );
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="about" ref={sectionRef} className="py-16 sm:py-20 bg-background">
+    <section id="about" className="py-16 sm:py-20 bg-background">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16 reveal">
+        <div className="text-center mb-12 sm:mb-16 animate-fade-in-up">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-200 dark:border-orange-800/50 bg-orange-50 dark:bg-orange-950/20 text-[#ff6b00] text-sm font-semibold mb-4">
             <Shield className="w-4 h-4" aria-hidden="true" />
             Who We Are
@@ -72,7 +54,7 @@ export default function About() {
         {/* Two-column layout */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: Text */}
-          <div className="reveal-left space-y-5 sm:space-y-6">
+          <div className="animate-fade-in-up space-y-5 sm:space-y-6">
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               Launched in 2026, <strong className="text-foreground">AstraX Fusion Tech</strong> is a
               cybersecurity and technology education startup built by a team of
@@ -100,16 +82,16 @@ export default function About() {
               ))}
             </ul>
 
-            <button
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            <a
+              href="#contact"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl text-sm font-semibold text-white bg-brand-gradient hover:opacity-90 active:scale-95 transition-all duration-200 shadow-lg shadow-orange-200/40 dark:shadow-orange-900/30"
             >
               Work With Us
-            </button>
+            </a>
           </div>
 
           {/* Right: Visual */}
-          <div className="reveal-right">
+          <div className="animate-fade-in-up">
             <div className="relative flex items-center justify-center">
               {/* Central shield graphic */}
               <div className="relative z-10 mx-auto w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center">
